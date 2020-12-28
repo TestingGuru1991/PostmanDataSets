@@ -1,0 +1,72 @@
+{
+	"info": {
+		"_postman_id": "ba60e470-d9ce-4e89-b5ff-00fccc3c83de",
+		"name": "Data set",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Data set with list",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var companies = pm.environment.get(\"companies\");\r",
+							"\r",
+							"if(!companies) {\r",
+							"    companies = [\"Google\", \"Yahoo\", \"Facebook\", \"Postman\"];\r",
+							"}\r",
+							"\r",
+							"var currentCompany = companies.shift();\r",
+							"pm.environment.set(\"company\", currentCompany);\r",
+							"pm.environment.set(\"companies\", companies);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var companies = pm.environment.get(\"companies\");\r",
+							"\r",
+							"if(companies && companies.length > 0) {\r",
+							"    postman.setNextRequest(\"Data set with list\");\r",
+							"} else {\r",
+							"    postman.setNextRequest(null);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{company}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://httpreq.com/soft-band-23u9798e/record",
+					"protocol": "https",
+					"host": [
+						"httpreq",
+						"com"
+					],
+					"path": [
+						"soft-band-23u9798e",
+						"record"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

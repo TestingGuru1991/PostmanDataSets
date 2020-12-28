@@ -1,0 +1,2 @@
+When you run tests with "Postma runner" you can select "data > select file".
+That data file is "data.json".
